@@ -1,21 +1,28 @@
 # Leibniz
 
-**TODO: Add description**
+Leibniz is a math expression parser and evaluator.
 
-## Installation
+## Usage
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `leibniz` to your list of dependencies in `mix.exs`:
+Evaluating simple math expressions
 
 ```elixir
-def deps do
-  [
-    {:leibniz, "~> 0.1.0"}
-  ]
-end
+
+Leibniz.eval("1 + 1")
+
+{:ok, 2}
+
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/leibniz](https://hexdocs.pm/leibniz).
 
+Evaluating math expression with variables:
+
+```elixir
+Leibniz.eval("10 * foo", foo: 10)
+
+{:ok, 100}
+```
+
+## LICENSE
+
+MIT
