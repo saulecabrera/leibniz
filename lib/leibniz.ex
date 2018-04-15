@@ -1,5 +1,25 @@
 defmodule Leibniz do
 
+  @moduledoc """
+  Leibniz is a math expression parser and evaluator.
+  """
+
+  @doc ~S"""
+  Evaluates a valid math expression interpolating any given values.
+
+  ## Examples
+  
+      iex> Leibniz.eval("2 * 10 / 2")
+      {:ok, 10.0}
+
+      iex> Leibniz.eval("2 * foo + bar - baz", foo: 5.3, bar: 10, baz: 3)
+      {:ok, 17.6}
+
+      iex> Leibniz.eval("2 * x + y")
+      {:error, "value expected for the following dependencies: x,y"}
+  """
+
+  @spec eval(String.t, Keyword.t(number)) :: {:ok, number} | {:error, term} 
   def eval(expr, vars \\ []) do
     with {:ok, ast} <- parse(expr),
          :ok <- verify_dependencies(dependecies(ast), Keyword.keys(vars)) do
@@ -14,6 +34,7 @@ defmodule Leibniz do
          {:ok, ast} <- :parser.parse(tokens) do
       {:ok, ast}
     else
+      {:error, e, _} -> {:error, e}
       {:error, e} -> {:error, e}
     end
   end
@@ -46,7 +67,7 @@ defmodule Leibniz do
   defp verify_dependencies(required, actual) do
     case required -- actual do
       [] -> :ok
-      missing -> {:error, "value expected for the following dependecies: #{Enum.join(missing, ",")}"}
+      missing -> {:error, "value expected for the following dependencies: #{Enum.join(missing, ",")}"}
     end
   end
 end
