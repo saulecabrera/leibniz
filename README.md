@@ -1,4 +1,4 @@
-# Leibniz
+# Leibniz [![Build Status](https://travis-ci.org/saulecabrera/leibniz.svg?branch=master)](https://travis-ci.org/saulecabrera/leibniz)
 
 Leibniz is a math expression parser and evaluator.
 
