@@ -8,6 +8,9 @@ before_script:
   - MIX_ENV=test mix compile
 
 script:
-  - mix test
+  - MIX_ENV=test mix do compile, coveralls.json
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 
 
