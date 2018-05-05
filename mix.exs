@@ -10,6 +10,8 @@ defmodule Leibniz.MixProject do
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test, "coveralls.json": :test],
       description: @desc,
       package: package()
     ]
@@ -32,7 +34,8 @@ defmodule Leibniz.MixProject do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.16", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.16", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.8", only: :test}
     ]
   end
 end
